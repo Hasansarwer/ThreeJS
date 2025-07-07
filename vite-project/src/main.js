@@ -19,7 +19,7 @@ const dodecahedron = new THREE.Mesh(geometry, material);
 
 
 const boxGeometry = new THREE.BoxGeometry(2, 0.1, 2);
-const boxMaterial = new THREE.MeshLambertMaterial({ color: 0xB4B4B3});
+const boxMaterial = new THREE.MeshStandardMaterial({ color: 0xB4B4B3, emissive: 0xB4B4B3 });
 const box = new THREE.Mesh(boxGeometry, boxMaterial);
 box.position.y = -1.5;
 
@@ -57,4 +57,12 @@ function animate() {
   controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
   renderer.render(scene, camera);
 }
+
+// Handle window resize
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
 animate();
